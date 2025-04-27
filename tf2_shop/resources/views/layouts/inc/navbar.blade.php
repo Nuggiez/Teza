@@ -12,7 +12,7 @@ $logout = function (Logout $logout) {
 
 <nav class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
     <!-- Logo -->
-    <a href="{{ route('dashboard') }}" wire:navigate class="mx-auto md:mx-0 flex items-center">
+    <a href="{{ route('home') }}" wire:navigate class="mx-auto md:mx-0 flex items-center">
         <span class="self-center text-5xl whitespace-nowrap">TradePlaza</span>
     </a>
 
@@ -51,12 +51,12 @@ $logout = function (Logout $logout) {
             </a>
 
             <button wire:click="logout" class="text-[#FF9D00] font-tf2 flex flex-col items-center focus:outline-none">
-                <img src="{{ asset('icons/navigation/logout.svg') }}" class="w-[2.5rem] h-[2.5rem] mx-auto">log out
+                <img src="{{ asset('icons/navigation/logout.svg') }}" type="svg" class="w-[2.5rem] h-[2.5rem] mx-auto">log out
             </button>
         @else
             <!-- If user is guest: Show Sign In -->
             <a href="{{ route('register') }}" wire:navigate class="text-[#FF9D00] font-tf2 flex flex-col items-center">
-                <img src="{{ asset('icons/navigation/login.svg') }}" class="w-[2.5rem] h-[2.5rem] mx-auto">sign up
+                <img src="{{ asset('icons/navigation/login.svg') }}" class="w-[2.5rem] h-[2.5rem] fill-[#FF9D00] mx-auto">sign up
             </a>
         @endauth
 
