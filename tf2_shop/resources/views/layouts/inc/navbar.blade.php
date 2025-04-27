@@ -56,7 +56,7 @@ $logout = function (Logout $logout) {
         @else
             <!-- If user is guest: Show Sign In -->
             <a href="{{ route('register') }}" wire:navigate class="text-[#FF9D00] font-tf2 flex flex-col items-center">
-                <img src="{{ asset('icons/navigation/login.svg') }}" class="w-[2.5rem] h-[2.5rem] mx-auto">sign in
+                <img src="{{ asset('icons/navigation/login.svg') }}" class="w-[2.5rem] h-[2.5rem] mx-auto">sign up
             </a>
         @endauth
 
