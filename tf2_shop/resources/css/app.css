@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Neutrals (60%) */
+  --color-bg-primary: #2c2a2a;
+  --color-bg-secondary: #3a3838; 
+  --color-text-primary: #ffffff;
+
+  /* Accent (30%) */
+  --color-accent: #ff9d00;
+  --color-accent-hover: #e68c00; 
+  --color-border: #ff9d00;
+  --color-border-focus: #e68c00; 
+
+  /* Highlight (10%) */
+  --color-highlight: #2c2a2a;
+  --color-shadow: rgba(0, 0, 0, 0.5);
+
+  /* Utility colors */
+  --color-error: #e53935;
+  --color-success: #43a047;
+  --color-warning: #fbc02d;
+}

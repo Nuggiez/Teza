@@ -29,7 +29,7 @@ class CategoryController extends Controller
         if($request->hasFile('image')){
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
+            $filename = strtolower($validatedData['name']).'.'.$ext;
 
             $file->move('uploads/category',$filename);
             $category->image = $filename;
