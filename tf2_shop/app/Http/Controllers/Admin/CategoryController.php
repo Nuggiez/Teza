@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryFormRequest;
 use App\Models\Category;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -38,6 +39,36 @@ class CategoryController extends Controller
         $category->save();
         return redirect('admin/category')->with('message','Category Added Successfully');
 
+    }
+
+    public function edit(Category $category)
+    {
+        return view('admin.category.edit',compact('category'));
+    }
+
+    public function update(CategoryFormRequest $request, $category)
+    {
+        $category = Category::findOrFail($category);
+        $validatedData = $request->validated();
+       
+        $category->name = $validatedData['name'];
+        $category->description = $validatedData['description'];
+
+        if($request->hasFile('image')){
+            $path = 'uploads/category/' . $category->image;
+            if(File::exists($path)){
+               File::delete($path);
+            }
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $filename = strtolower($validatedData['name']).'.'.$ext;
+
+            $file->move('uploads/category/', $filename);
+            $category->image = $filename;
+        }
+        $category->update();
+
+        return redirect('admin/category')->with('message','Category Updated Successfully');
     }
 }
 

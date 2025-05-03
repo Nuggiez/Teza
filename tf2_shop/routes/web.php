@@ -18,8 +18,12 @@ Route::view('profile', 'profile')
 Route::prefix('admin')->group(function(){
     Route::controller(App\Http\Controllers\Admin\CategoryController::class)->group(function () {
         Route::get('/category', 'index');
+
         Route::get('/category/create', 'create');
         Route::post('/category', 'store');
+
+        Route::get('category/edit/{category}', 'edit');
+        Route::put('category/{category}', 'update');
     });
     
 });
