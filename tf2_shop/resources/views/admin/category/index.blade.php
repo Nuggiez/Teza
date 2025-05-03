@@ -1,7 +1,3 @@
 <x-app-layout>
-    <div>
-        <x-primary-button class="ms-4">
-            {{ __('Register') }}
-        </x-primary-button>
-    </div>
+    <livewire:admin.category.index />
 </x-app-layout>
