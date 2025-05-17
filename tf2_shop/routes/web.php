@@ -41,7 +41,7 @@ Route::prefix('frontend')->group(function () {
     });
 
     Route::controller(App\Http\Controllers\Frontend\CategoryController::class)->group(function () {
-        Route::get('/category', 'index');
+        Route::get('/category/{category}', 'index');
     });
 });
 

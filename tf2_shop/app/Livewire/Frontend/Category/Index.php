@@ -11,10 +11,18 @@ class Index extends Component
 {
     use WithPagination;
     public $product_id;
+    public $category;
+
+    public function mount($category)
+    {
+        $this->category = $category;
+    }
 
     public function render()
     {
-        $products = Product::orderBy('id', 'ASC')->paginate(12);
-        return view('livewire.frontend.category.index', ['products' => $products]);
+        $products = Product::where('category_id', $this->category->id)
+            ->orderBy('id', 'ASC')
+            ->paginate(12);
+        return view('livewire.frontend.category.index', compact('products'));
     }
 }
