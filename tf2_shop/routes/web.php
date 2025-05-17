@@ -13,9 +13,9 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-    //Category
+//Category
 
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->group(function () {
     Route::controller(App\Http\Controllers\Admin\CategoryController::class)->group(function () {
         Route::get('/category', 'index');
 
@@ -25,6 +25,24 @@ Route::prefix('admin')->group(function(){
         Route::get('category/edit/{category}', 'edit');
         Route::put('category/{category}', 'update');
     });
-    
 });
-require __DIR__.'/auth.php';
+
+Route::prefix('frontend')->group(function () {
+    Route::controller(App\Http\Controllers\Frontend\ProductController::class)->group(function () {
+        Route::get('/product', 'index');
+
+        Route::get('/product/create', 'create');
+        Route::post('/product', 'store');
+
+        Route::get('product/edit/{product}', 'edit');
+        Route::put('product/{product}', 'update');
+
+        Route::get('/category', 'index');
+    });
+
+    Route::controller(App\Http\Controllers\Frontend\CategoryController::class)->group(function () {
+        Route::get('/category', 'index');
+    });
+});
+
+require __DIR__ . '/auth.php';
