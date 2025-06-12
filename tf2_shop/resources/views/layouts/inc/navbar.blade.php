@@ -32,15 +32,15 @@ $logout = function (Logout $logout) {
     <!-- Nav Links -->
     <div class="flex items-center space-x-6 mx-auto md:mx-0 mt-4 md:mt-0">
 
-        <a href="#" class="text-[#FF9D00] font-tf2 flex flex-col items-center">
+        <a href="{{ route('sell') }}" class="text-[#FF9D00] font-tf2 flex flex-col items-center">
             <img src="{{ asset('icons/navigation/sell.svg') }}" class="w-[2.5rem] h-[2.5rem] mx-auto">sell
         </a>
 
-        <a href="#" class="text-[#FF9D00] font-tf2 flex flex-col items-center">
+        <a href="{{ route('cart') }}" class="text-[#FF9D00] font-tf2 flex flex-col items-center">
             <img src="{{ asset('icons/navigation/cart.svg') }}" class="w-[2.5rem] h-[2.5rem] mx-auto">cart
         </a>
 
-        <a href="#" class="text-[#FF9D00] font-tf2 flex flex-col items-center">
+        <a href="{{ route('contact') }}" class="text-[#FF9D00] font-tf2 flex flex-col items-center">
             <img src="{{ asset('icons/navigation/contact.svg') }}" class="w-[2.5rem] h-[2.5rem] mx-auto">contact us
         </a>
 

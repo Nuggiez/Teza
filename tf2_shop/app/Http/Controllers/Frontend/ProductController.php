@@ -16,6 +16,11 @@ class ProductController extends Controller
         return view('frontend.product.index');
     }
 
+        public function index2()
+    {
+        return view('frontend.product.single');
+    }
+
     public function create()
     {
         $categories = Category::all();

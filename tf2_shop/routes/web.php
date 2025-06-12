@@ -29,7 +29,7 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('frontend')->group(function () {
     Route::controller(App\Http\Controllers\Frontend\ProductController::class)->group(function () {
-        Route::get('/product', 'index');
+        Route::get('/product', 'index')->name('sell');
 
         Route::get('/product/create', 'create');
         Route::post('/product', 'store');
@@ -38,10 +38,20 @@ Route::prefix('frontend')->group(function () {
         Route::put('product/{product}', 'update');
 
         Route::get('/category', 'index');
+
+        Route::get('/product/single', 'index2');
     });
 
     Route::controller(App\Http\Controllers\Frontend\CategoryController::class)->group(function () {
         Route::get('/category/{category}', 'index');
+    });
+
+    Route::controller(App\Http\Controllers\Frontend\CheckoutController::class)->group(function () {
+        Route::get('/checkout/cart', 'cart')->name('cart');
+    });
+
+    Route::controller(App\Http\Controllers\Frontend\ContactUsController::class)->group(function () {
+        Route::get('/contact_us', 'index')->name('contact');
     });
 });
 
