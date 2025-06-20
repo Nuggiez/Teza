@@ -29,7 +29,7 @@
 
     <hr class="h-1 my-4 bg-[#FF9D00] border-0">
 
-    <main class="px-4">
+    <main class="px-4 max-w-7xl w-full mx-auto">
         {{ $slot }}
     </main>
 

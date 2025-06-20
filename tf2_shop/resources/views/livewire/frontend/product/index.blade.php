@@ -39,7 +39,7 @@
                         {{ $product->price }}
                     </td>
                     <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">
-                        {{ $product->category_id }}
+                        {{ $product->category ? $product->category->name : 'N/A' }}
                     </td>
 
                     <td class="border-[var(--color-border)] border-[0.25rem] h-20 p-0">
@@ -71,7 +71,7 @@
                         Cancel
                     </x-primary-button>
                 
-                    <x-danger-button wire:click="destroyproduct" @click="showDeleteModal = false" class="w-1/2">
+                    <x-danger-button wire:click="destroyProduct" @click="showDeleteModal = false" class="w-1/2">
                         Confirm
                     </x-danger-button>
                 </div>

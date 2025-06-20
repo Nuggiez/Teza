@@ -40,6 +40,7 @@ Route::prefix('frontend')->group(function () {
         Route::get('/category', 'index');
 
         Route::get('/product/single', 'index2');
+        Route::get('/product/single/{id}', 'showSingle')->name('product.single');
     });
 
     Route::controller(App\Http\Controllers\Frontend\CategoryController::class)->group(function () {

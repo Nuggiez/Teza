@@ -13,8 +13,8 @@
             <x-text-input name="description" id="description" value="{{ $product->description }}" required />
         </div>
         <div class="mb-2">
-            <x-input-label for="dropzone-file" :value="'Image'" />
-            <x-file-input name="dropzone-file" id="dropzone-file" required />
+            <x-input-label for="image" :value="'Image'" />
+            <x-file-input name="image" id="image" required />
         </div>
         <div class="mb-2">
             <x-input-label for="price" :value="'Price'" />
