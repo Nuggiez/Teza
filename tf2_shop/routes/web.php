@@ -29,6 +29,16 @@ Route::prefix('admin')->group(function () {
         Route::get('/orders', 'index')->name('admin.orders.index');
         Route::post('/orders/{order}/complete', 'complete')->name('admin.orders.complete');
     });
+    Route::controller(App\Http\Controllers\Admin\FundRequestController::class)->group(function () {
+        Route::get('/fund-requests', 'index')->name('admin.fund_requests.index');
+        Route::post('/fund-requests/{fund_request}/complete', 'complete')->name('admin.fund_requests.complete');
+        Route::post('/fund-requests/{fund_request}/reject', 'reject')->name('admin.fund_requests.reject');
+    });
+    Route::controller(App\Http\Controllers\Admin\ClaimRequestController::class)->group(function () {
+        Route::get('/claim-requests', 'index')->name('admin.claim_requests.index');
+        Route::post('/claim-requests/{claim_request}/complete', 'complete')->name('admin.claim_requests.complete');
+        Route::post('/claim-requests/{claim_request}/reject', 'reject')->name('admin.claim_requests.reject');
+    });
 });
 
 Route::prefix('frontend')->group(function () {
@@ -67,5 +77,8 @@ Route::prefix('frontend')->group(function () {
         Route::delete('/cart/remove/{cart}', 'remove')->name('cart.remove');
     });
 });
+
+Route::post('/fund-request', [App\Http\Controllers\Frontend\FundRequestController::class, 'store'])->name('fund_request.store');
+Route::post('/claim-request', [App\Http\Controllers\Frontend\ClaimRequestController::class, 'store'])->name('claim_request.store');
 
 require __DIR__ . '/auth.php';

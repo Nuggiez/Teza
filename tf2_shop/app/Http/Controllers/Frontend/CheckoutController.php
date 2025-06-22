@@ -36,6 +36,10 @@ class CheckoutController extends Controller
 
         $total = $cartItems->sum(fn($item) => $item->product->price);
 
+        if ($user->funds < $total) {
+            return redirect()->route('cart')->with('error', 'Insufficient funds to complete the order.');
+        }
+
         $order = Order::create([
             'user_id' => $user->id,
             'status' => 'pending',
@@ -49,6 +53,10 @@ class CheckoutController extends Controller
                 'price' => $item->product->price,
             ]);
         }
+
+        // Deduct funds
+        $user->funds -= $total;
+        $user->save();
 
         Cart::where('user_id', $user->id)->delete();
 

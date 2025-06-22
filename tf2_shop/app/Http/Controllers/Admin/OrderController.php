@@ -16,8 +16,20 @@ class OrderController extends Controller
 
     public function complete(Order $order)
     {
+        if ($order->status !== 'pending') {
+            return redirect()->route('admin.orders.index')->with('error', 'Order already processed.');
+        }
         $order->status = 'completed';
         $order->save();
-        return redirect()->route('admin.orders.index')->with('success', 'Order marked as completed.');
+        // Distribute funds to sellers
+        foreach ($order->items as $item) {
+            $product = $item->product;
+            if ($product && $product->user) {
+                $seller = $product->user;
+                $seller->funds += $item->price;
+                $seller->save();
+            }
+        }
+        return redirect()->route('admin.orders.index')->with('success', 'Order marked as completed. Sellers have been paid.');
     }
 }

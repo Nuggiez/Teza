@@ -10,7 +10,9 @@ use function Livewire\Volt\state;
 
 state([
     'name' => fn () => auth()->user()->name,
-    'email' => fn () => auth()->user()->email
+    'email' => fn () => auth()->user()->email,
+    'steam_url' => fn () => auth()->user()->steam_url,
+    'paypal_username' => fn () => auth()->user()->paypal_username,
 ]);
 
 $updateProfileInformation = function () {
@@ -19,6 +21,8 @@ $updateProfileInformation = function () {
     $validated = $this->validate([
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
+        'steam_url' => ['nullable', 'string', 'max:255'],
+        'paypal_username' => ['nullable', 'string', 'max:255'],
     ]);
 
     $user->fill($validated);
@@ -88,6 +92,18 @@ $sendVerification = function () {
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div>
+            <x-input-label for="steam_url" :value="__('Steam URL')" />
+            <x-text-input wire:model="steam_url" id="steam_url" name="steam_url" type="text" class="mt-1 block w-full" autocomplete="off" />
+            <x-input-error class="mt-2" :messages="$errors->get('steam_url')" />
+        </div>
+
+        <div>
+            <x-input-label for="paypal_username" :value="__('PayPal Username')" />
+            <x-text-input wire:model="paypal_username" id="paypal_username" name="paypal_username" type="text" class="mt-1 block w-full" autocomplete="off" />
+            <x-input-error class="mt-2" :messages="$errors->get('paypal_username')" />
         </div>
 
         <div class="flex items-center gap-4">

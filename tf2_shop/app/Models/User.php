@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'steam_url',
         'funds',
+        'paypal_username',
     ];
 
     /**
