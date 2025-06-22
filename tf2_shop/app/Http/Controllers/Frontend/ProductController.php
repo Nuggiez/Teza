@@ -57,17 +57,22 @@ class ProductController extends Controller
         return redirect('frontend/product')->with('message', 'Product Added Successfully');
     }
 
-
-
     public function edit(Product $product)
     {
+        if ($product->user_id !== auth()->id()) {
+            return redirect()->back()->with('error', 'You are not authorized to edit this product.');
+        }
+
         $categories = Category::all();
         return view('frontend.product.edit', compact('categories', 'product'));
     }
 
-    public function update(ProductFormRequest $request, $product)
+    public function update(ProductFormRequest $request, Product $product)
     {
-        $product = Product::findOrFail($product);
+        if ($product->user_id !== auth()->id()) {
+            return redirect()->back()->with('error', 'You are not authorized to update this product.');
+        }
+        
         $validatedData = $request->validated();
 
         $product->name = $validatedData['name'];
@@ -96,5 +101,13 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         return view('frontend.product.single', compact('product'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $products = Product::where('name', 'like', "%{$query}%")->paginate(12);
+
+        return view('frontend.product.search', compact('products', 'query'));
     }
 }

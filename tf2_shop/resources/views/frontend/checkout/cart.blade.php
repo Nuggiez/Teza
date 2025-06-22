@@ -9,18 +9,24 @@
             </div>
 
             <div class="flex flex-col w-full min-h-96 border border-[var(--color-border)] text-2xl">
-                @for ($i = 0; $i < 5; $i++)
-                    <x-cart-element image="imahhuhuge" name="jj" price="2$"></x-cart-element>
-                @endfor
+                @forelse ($cartItems as $item)
+                    <x-cart-element :item="$item" />
+                @empty
+                    <div class="flex items-center justify-center h-full">
+                        <p>Your cart is empty.</p>
+                    </div>
+                @endforelse
             </div>
 
             <div class="flex w-full border border-[var(--color-border)] text-2xl">
-                <div class="border border-[var(--color-border)] flex-1 min-w-0 p-2">Items In Cart: 0</div>
-                <div class="border border-[var(--color-border)] flex-1 min-w-0 p-2">Total Price: 0</div>
-                <div class="border border-[var(--color-border)] flex-[2] min-w-0 p-4 relative"> <x-primary-button
-                        class="rounded-none absolute top-0 left-0">
+                <div class="border border-[var(--color-border)] flex-1 min-w-0 p-2">Items In Cart: {{ $cartItems->count() }}</div>
+                <div class="border border-[var(--color-border)] flex-1 min-w-0 p-2">Total Price:
+                    ${{ $cartItems->sum(function($item) { return $item->product->price; }) }}</div>
+                <div class="border border-[var(--color-border)] flex-[2] min-w-0 p-4 relative">
+                    <x-primary-button class="rounded-none absolute top-0 left-0">
                         {{ __('Checkout') }}
-                    </x-primary-button></div>
+                    </x-primary-button>
+                </div>
             </div>
         </div>
     </div>

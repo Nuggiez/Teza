@@ -3,6 +3,7 @@
 namespace App\Livewire\Frontend\Product;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\File;
@@ -14,7 +15,10 @@ class Index extends Component
 
     public function render()
     {
-        $products = Product::with('category')->orderBy('id', 'ASC')->paginate(5);
+        $products = Product::where('user_id', Auth::id())
+            ->with('category')
+            ->orderBy('id', 'ASC')
+            ->paginate(5);
         return view('livewire.frontend.product.index', ['products' => $products]);
     }
 
@@ -25,14 +29,20 @@ class Index extends Component
 
     public function destroyProduct()
     {
-        $product = Product::find($this->product_id);
-        
-        $path = 'uploads/product/'.$product->image;
-        if(File::exists($path)){
-            File::delete($path);
-        }
+        $product = Product::where('id', $this->product_id)
+            ->where('user_id', Auth::id())
+            ->first();
 
-        $product->delete();
-        session()->flash('message','product Deleted Successfully');
+        if ($product) {
+            $path = 'uploads/product/' . $product->image;
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $product->delete();
+            session()->flash('message', 'Product Deleted Successfully');
+        } else {
+            session()->flash('error', 'You are not authorized to delete this product.');
+        }
     }
 }

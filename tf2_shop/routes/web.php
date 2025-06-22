@@ -43,6 +43,8 @@ Route::prefix('frontend')->group(function () {
         Route::get('/product/single/{id}', 'showSingle')->name('product.single');
     });
 
+    Route::get('/search', [App\Http\Controllers\Frontend\ProductController::class, 'search']);
+
     Route::controller(App\Http\Controllers\Frontend\CategoryController::class)->group(function () {
         Route::get('/category/{category}', 'index');
     });
@@ -53,6 +55,11 @@ Route::prefix('frontend')->group(function () {
 
     Route::controller(App\Http\Controllers\Frontend\ContactUsController::class)->group(function () {
         Route::get('/contact_us', 'index')->name('contact');
+    });
+
+    Route::controller(App\Http\Controllers\Frontend\CartController::class)->group(function () {
+        Route::post('/cart/add/{product}', 'add')->name('cart.add');
+        Route::delete('/cart/remove/{cart}', 'remove')->name('cart.remove');
     });
 });
 

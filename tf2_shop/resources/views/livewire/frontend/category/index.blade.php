@@ -10,9 +10,12 @@
                     <span class="w-full flex justify-center text-lg text-[var(--color-text-primary)]">{{ $product->price }} $</span>
                 </div>
             </a>
-            <x-primary-button class="rounded-none">
-                {{ __('Add to cart') }}
-            </x-primary-button>
+            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                @csrf
+                <x-primary-button class="rounded-none w-full">
+                    {{ __('Add to cart') }}
+                </x-primary-button>
+            </form>
         </div>
     @endforeach
 

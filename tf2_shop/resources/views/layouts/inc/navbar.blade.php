@@ -17,11 +17,14 @@ $logout = function (Logout $logout) {
     </a>
 
     <!-- Search Form -->
-    <form class="flex-grow flex items-center mx-4">
+    <form action="{{ url('frontend/search') }}" method="GET" class="flex-grow flex items-center mx-4">
         <div class="relative w-full">
-            <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-[1.25rem] text-white bg-transparent rounded-[1.25rem] border-[#FF9D00] border-[0.125rem] placeholder-white" placeholder="Search" required />
+            <input type="search" name="query" id="search-dropdown"
+                class="block p-2.5 w-full z-20 text-[1.25rem] text-white bg-transparent rounded-[1.25rem] border-[#FF9D00] border-[0.125rem] placeholder-white"
+                placeholder="Search" value="{{ request('query') }}" required />
             <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white">
-                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                 </svg>
                 <span class="sr-only">Search</span>
@@ -36,8 +39,12 @@ $logout = function (Logout $logout) {
             <img src="{{ asset('icons/navigation/sell.svg') }}" class="w-[2.5rem] h-[2.5rem] mx-auto">sell
         </a>
 
-        <a href="{{ route('cart') }}" class="text-[#FF9D00] font-tf2 flex flex-col items-center">
-            <img src="{{ asset('icons/navigation/cart.svg') }}" class="w-[2.5rem] h-[2.5rem] mx-auto">cart
+        <a href="{{ route('cart') }}" class="text-[#FF9D00] font-tf2 flex flex-col items-center relative">
+            <img src="{{ asset('icons/navigation/cart.svg') }}" class="w-[2.em] h-[2.5rem] mx-auto">cart
+            @if ($cartCount > 0)
+                <span
+                    class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">{{ $cartCount }}</span>
+            @endif
         </a>
 
         <a href="{{ route('contact') }}" class="text-[#FF9D00] font-tf2 flex flex-col items-center">
