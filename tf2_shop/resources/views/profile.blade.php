@@ -13,6 +13,13 @@
                 </div>
             </div>
 
+            <div class="p-4 sm:p-8 bg-[var(--color-bg-secondary)] shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    <h3 class="text-lg font-medium mb-2">Account Funds</h3>
+                    <div class="text-2xl font-bold">${{ number_format(auth()->user()->funds, 2) }}</div>
+                </div>
+            </div>
+
             <div class="p-4 sm:p-8 bg-[var(--color-bg-secondary)]  shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <livewire:profile.update-password-form />

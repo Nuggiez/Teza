@@ -25,6 +25,10 @@ Route::prefix('admin')->group(function () {
         Route::get('category/edit/{category}', 'edit');
         Route::put('category/{category}', 'update');
     });
+    Route::controller(App\Http\Controllers\Admin\OrderController::class)->group(function () {
+        Route::get('/orders', 'index')->name('admin.orders.index');
+        Route::post('/orders/{order}/complete', 'complete')->name('admin.orders.complete');
+    });
 });
 
 Route::prefix('frontend')->group(function () {
@@ -51,6 +55,7 @@ Route::prefix('frontend')->group(function () {
 
     Route::controller(App\Http\Controllers\Frontend\CheckoutController::class)->group(function () {
         Route::get('/checkout/cart', 'cart')->name('cart');
+        Route::post('/checkout/checkout', 'checkout')->name('checkout.process');
     });
 
     Route::controller(App\Http\Controllers\Frontend\ContactUsController::class)->group(function () {
