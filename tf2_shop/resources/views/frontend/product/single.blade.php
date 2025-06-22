@@ -2,7 +2,7 @@
     <div class="h-screen flex text-2xl flex-col">
         <div class="flex w-full">
             <div class="border border-[var(--color-border)] flex-1 p-2">
-                <img class="w-full object-cover" src="{{ asset('uploads/product/' . $product->image) }}"
+                <img class="w-full max-h-96  object-cover" src="{{ asset('uploads/product/' . $product->image) }}"
                     alt="{{ $product->name }}">
             </div>
 

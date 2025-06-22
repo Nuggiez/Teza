@@ -8,43 +8,45 @@
             <div class="bg-red-500 text-white p-4 rounded mb-4">{{ session('error') }}</div>
         @endif
         <div class="overflow-x-auto w-full">
-            <table class="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+            <table class="w-full border-collapse bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
                 <thead>
                     <tr>
-                        <th class="p-2 border">ID</th>
-                        <th class="p-2 border">User</th>
-                        <th class="p-2 border">PayPal.me Link</th>
-                        <th class="p-2 border">Amount</th>
-                        <th class="p-2 border">Status</th>
-                        <th class="p-2 border">Created</th>
-                        <th class="p-2 border">Action</th>
+                        <th class="p-2 border border-[var(--color-border)]">ID</th>
+                        <th class="p-2 border border-[var(--color-border)]">User</th>
+                        <th class="p-2 border border-[var(--color-border)]">PayPal.me Link</th>
+                        <th class="p-2 border border-[var(--color-border)]">Amount</th>
+                        <th class="p-2 border border-[var(--color-border)]">Status</th>
+                        <th class="p-2 border border-[var(--color-border)]">Created</th>
+                        <th class="p-2 border border-[var(--color-border)]">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($claimRequests as $request)
                         <tr>
-                            <td class="p-2 border">{{ $request->id }}</td>
-                            <td class="p-2 border">{{ $request->user->name ?? '-' }}</td>
-                            <td class="p-2 border">
+                            <td class="p-2 border border-[var(--color-border)]">{{ $request->id }}</td>
+                            <td class="p-2 border border-[var(--color-border)]">{{ $request->user->name ?? '-' }}</td>
+                            <td class="p-2 border border-[var(--color-border)]">
                                 @if($request->user && $request->user->paypal_username)
-                                    <a href="https://www.paypal.com/paypalme/{{ $request->user->paypal_username }}/{{ $request->amount }}" target="_blank" class="text-blue-600 underline">PayPal.me/{{ $request->user->paypal_username }}/{{ $request->amount }}</a>
+                                    <a href="https://www.paypal.com/paypalme/{{ $request->user->paypal_username }}/{{ $request->amount }}" target="_blank" class=" underline">PayPal.me/{{ $request->user->paypal_username }}/{{ $request->amount }}</a>
                                 @else
                                     <span class="text-gray-500">No PayPal username</span>
                                 @endif
                             </td>
-                            <td class="p-2 border">${{ number_format($request->amount, 2) }}</td>
-                            <td class="p-2 border">{{ ucfirst($request->status) }}</td>
-                            <td class="p-2 border">{{ $request->created_at->format('Y-m-d H:i') }}</td>
-                            <td class="p-2 border">
+                            <td class="p-2 border border-[var(--color-border)]">${{ number_format($request->amount, 2) }}</td>
+                            <td class="p-2 border border-[var(--color-border)]">{{ ucfirst($request->status) }}</td>
+                            <td class="p-2 border border-[var(--color-border)]">{{ $request->created_at->format('Y-m-d H:i') }}</td>
+                            <td class="border border-[var(--color-border)] p-0">
                                 @if($request->status === 'pending')
-                                    <form action="{{ route('admin.claim_requests.complete', $request) }}" method="POST" class="inline">
-                                        @csrf
-                                        <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded">Complete</button>
-                                    </form>
-                                    <form action="{{ route('admin.claim_requests.reject', $request) }}" method="POST" class="inline ml-2">
-                                        @csrf
-                                        <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded">Reject</button>
-                                    </form>
+                                    <div class="flex w-full h-full">
+                                        <form action="{{ route('admin.claim_requests.complete', $request) }}" method="POST" class="flex-1 h-full">
+                                            @csrf
+                                            <button type="submit" class="w-full h-full bg-green-600 text-white px-3 py-2">Complete</button>
+                                        </form>
+                                        <form action="{{ route('admin.claim_requests.reject', $request) }}" method="POST" class="flex-1 h-full">
+                                            @csrf
+                                            <button type="submit" class="w-full h-full bg-red-600 text-white px-3 py-2">Reject</button>
+                                        </form>
+                                    </div>
                                 @elseif($request->status === 'completed')
                                     <span class="text-green-700 font-bold">Completed</span>
                                 @else

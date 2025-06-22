@@ -57,9 +57,12 @@ $logout = function (Logout $logout) {
                 <img src="{{ asset('icons/navigation/profile.svg') }}" class="w-[2.5rem] h-[2.5rem] mx-auto">profile
             </a>
 
-            <button wire:click="logout" class="text-[#FF9D00] font-tf2 flex flex-col items-center focus:outline-none">
-                <img src="{{ asset('icons/navigation/logout.svg') }}" type="svg" class="w-[2.5rem] h-[2.5rem] mx-auto">log out
-            </button>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="text-[#FF9D00] font-tf2 flex flex-col items-center focus:outline-none">
+                    <img src="{{ asset('icons/navigation/logout.svg') }}" type="svg" class="w-[2.5rem] h-[2.5rem] mx-auto">log out
+                </button>
+            </form>
         @else
             <!-- If user is guest: Show Sign In -->
             <a href="{{ route('register') }}" wire:navigate class="text-[#FF9D00] font-tf2 flex flex-col items-center">
