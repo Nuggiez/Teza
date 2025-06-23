@@ -44,4 +44,13 @@ class CartController extends Controller
 
         return back()->with('success', 'Item removed from cart successfully!');
     }
+
+    public function index()
+    {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'You must be logged in to view your cart.');
+        }
+        $cartItems = \App\Models\Cart::with('product')->where('user_id', auth()->id())->get();
+        return view('frontend.checkout.cart', compact('cartItems'));
+    }
 }

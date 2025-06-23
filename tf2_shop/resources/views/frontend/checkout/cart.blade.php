@@ -23,7 +23,7 @@
                 <div class="border border-[var(--color-border)] flex-1 min-w-0 p-2">Total Price:
                     ${{ $cartItems->sum(function($item) { return $item->product->price; }) }}</div>
                 <div class="border border-[var(--color-border)] flex-[2] min-w-0 p-4 relative">
-                    <form action="{{ url('frontend/checkout/checkout') }}" method="POST">
+                    <form action="{{ route('checkout.process') }}" method="POST">
                         @csrf
                         <x-primary-button class="rounded-none absolute top-0 left-0 w-full">
                             {{ __('Checkout') }}

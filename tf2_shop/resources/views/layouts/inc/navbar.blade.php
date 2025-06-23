@@ -17,7 +17,7 @@ $logout = function (Logout $logout) {
     </a>
 
     <!-- Search Form -->
-    <form action="{{ url('frontend/search') }}" method="GET" class="flex-grow flex items-center mx-4">
+    <form action="{{ route('products.search') }}" method="GET" class="flex-grow flex items-center mx-4">
         <div class="relative w-full">
             <input type="search" name="query" id="search-dropdown"
                 class="block p-2.5 w-full z-20 text-[1.25rem] text-white bg-transparent rounded-[1.25rem] border-[#FF9D00] border-[0.125rem] placeholder-white"
@@ -35,11 +35,11 @@ $logout = function (Logout $logout) {
     <!-- Nav Links -->
     <div class="flex items-center space-x-6 mx-auto md:mx-0 mt-4 md:mt-0">
 
-        <a href="{{ route('sell') }}" class="text-[#FF9D00] font-tf2 flex flex-col items-center">
+        <a href="{{ route('products.index') }}" class="text-[#FF9D00] font-tf2 flex flex-col items-center">
             <img src="{{ asset('icons/navigation/sell.svg') }}" class="w-[2.5rem] h-[2.5rem] mx-auto">sell
         </a>
 
-        <a href="{{ route('cart') }}" class="text-[#FF9D00] font-tf2 flex flex-col items-center relative">
+        <a href="{{ route('cart.index') }}" class="text-[#FF9D00] font-tf2 flex flex-col items-center relative">
             <img src="{{ asset('icons/navigation/cart.svg') }}" class="w-[2.em] h-[2.5rem] mx-auto">cart
             @if ($cartCount > 0)
                 <span

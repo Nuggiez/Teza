@@ -6,9 +6,7 @@
     @endif
 
     <div>
-        <a href="{{ url('admin/category/create') }}" class="inline-flex items-center px-4 py-2 bg-[#FF9D00] border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-[#8b4f17] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-offset-2 transition ease-in-out duration-150 justify-center text-2xl'">
-            Add Category
-        </a>
+        <a href="{{ route('admin.categories.create') }}" class="inline-flex items-center px-4 py-2 bg-[#FF9D00] border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-[#8b4f17] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF9D00]">Add Category</a>
     </div>
 
     <br>
@@ -38,7 +36,7 @@
                     <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">{{ $category->description }}
                     </td>
                     <td class="border-[var(--color-border)] border-[0.25rem] h-20 p-0">
-                        <a href="{{ url('admin/category/edit/' . $category->id) }}" class="w-full h-1/2 bg-[var(--color-accent)] flex items-center justify-center text-[var(--color-bg-primary)]">
+                        <a href="{{ route('admin.categories.edit', $category) }}" class="w-full h-1/2 bg-[var(--color-accent)] flex items-center justify-center text-[var(--color-bg-primary)]">
                             Edit
                         </a>
                         <hr class="border-t-[0.25rem] border-[var(--color-border)]" />

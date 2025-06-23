@@ -2,83 +2,74 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\FundRequestController as AdminFundRequestController;
+use App\Http\Controllers\Admin\ClaimRequestController as AdminClaimRequestController;
+use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Frontend\ContactUsController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\FundRequestController;
+use App\Http\Controllers\Frontend\ClaimRequestController;
 
+// Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Profile
+Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
-
-//Category
-
-Route::prefix('admin')->group(function () {
-    Route::controller(App\Http\Controllers\Admin\CategoryController::class)->group(function () {
-        Route::get('/category', 'index');
-
-        Route::get('/category/create', 'create');
-        Route::post('/category', 'store');
-
-        Route::get('category/edit/{category}', 'edit');
-        Route::put('category/{category}', 'update');
-    });
-    Route::controller(App\Http\Controllers\Admin\OrderController::class)->group(function () {
-        Route::get('/orders', 'index')->name('admin.orders.index');
-        Route::post('/orders/{order}/complete', 'complete')->name('admin.orders.complete');
-    });
-    Route::controller(App\Http\Controllers\Admin\FundRequestController::class)->group(function () {
-        Route::get('/fund-requests', 'index')->name('admin.fund_requests.index');
-        Route::post('/fund-requests/{fund_request}/complete', 'complete')->name('admin.fund_requests.complete');
-        Route::post('/fund-requests/{fund_request}/reject', 'reject')->name('admin.fund_requests.reject');
-    });
-    Route::controller(App\Http\Controllers\Admin\ClaimRequestController::class)->group(function () {
-        Route::get('/claim-requests', 'index')->name('admin.claim_requests.index');
-        Route::post('/claim-requests/{claim_request}/complete', 'complete')->name('admin.claim_requests.complete');
-        Route::post('/claim-requests/{claim_request}/reject', 'reject')->name('admin.claim_requests.reject');
-    });
+// Admin
+Route::prefix('admin')->middleware(['auth', 'verified', 'admin'])->name('admin.')->group(function () {
+    Route::view('dashboard', 'admin.dashboard')->name('dashboard');
+    // Categories
+    Route::get('categories', [AdminCategoryController::class, 'index'])->name('categories.index');
+    Route::get('categories/create', [AdminCategoryController::class, 'create'])->name('categories.create');
+    Route::post('categories', [AdminCategoryController::class, 'store'])->name('categories.store');
+    Route::get('categories/{category}/edit', [AdminCategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('categories/{category}', [AdminCategoryController::class, 'update'])->name('categories.update');
+    // Orders
+    Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    Route::post('orders/{order}/complete', [AdminOrderController::class, 'complete'])->name('orders.complete');
+    // Fund Requests
+    Route::get('fund-requests', [AdminFundRequestController::class, 'index'])->name('fund_requests.index');
+    Route::post('fund-requests/{fund_request}/complete', [AdminFundRequestController::class, 'complete'])->name('fund_requests.complete');
+    Route::post('fund-requests/{fund_request}/reject', [AdminFundRequestController::class, 'reject'])->name('fund_requests.reject');
+    // Claim Requests
+    Route::get('claim-requests', [AdminClaimRequestController::class, 'index'])->name('claim_requests.index');
+    Route::post('claim-requests/{claim_request}/complete', [AdminClaimRequestController::class, 'complete'])->name('claim_requests.complete');
+    Route::post('claim-requests/{claim_request}/reject', [AdminClaimRequestController::class, 'reject'])->name('claim_requests.reject');
 });
 
-Route::prefix('frontend')->group(function () {
-    Route::controller(App\Http\Controllers\Frontend\ProductController::class)->group(function () {
-        Route::get('/product', 'index')->name('sell');
+// Public (user-facing) routes
+// Products
+Route::get('products', [ProductController::class, 'index'])->name('products.index');
+Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('products', [ProductController::class, 'store'])->name('products.store');
+Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::get('products/single', [ProductController::class, 'index2'])->name('products.single.index');
+Route::get('products/single/{id}', [ProductController::class, 'showSingle'])->name('products.single.show');
+Route::get('products/search', [ProductController::class, 'search'])->name('products.search');
 
-        Route::get('/product/create', 'create');
-        Route::post('/product', 'store');
+// Categories
+Route::get('categories/{category}', [CategoryController::class, 'index'])->name('categories.show');
 
-        Route::get('product/edit/{product}', 'edit');
-        Route::put('product/{product}', 'update');
+// Cart
+Route::get('cart', [CartController::class, 'index'])->name('cart.index'); // Add if you have a cart page
+Route::post('cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::delete('cart/remove/{cart}', [CartController::class, 'remove'])->name('cart.remove');
 
-        Route::get('/category', 'index');
+// Checkout
+Route::get('checkout', [CheckoutController::class, 'cart'])->name('checkout.cart');
+Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout.process');
 
-        Route::get('/product/single', 'index2');
-        Route::get('/product/single/{id}', 'showSingle')->name('product.single');
-    });
+// Contact
+Route::get('contact', [ContactUsController::class, 'index'])->name('contact');
 
-    Route::get('/search', [App\Http\Controllers\Frontend\ProductController::class, 'search']);
-
-    Route::controller(App\Http\Controllers\Frontend\CategoryController::class)->group(function () {
-        Route::get('/category/{category}', 'index');
-    });
-
-    Route::controller(App\Http\Controllers\Frontend\CheckoutController::class)->group(function () {
-        Route::get('/checkout/cart', 'cart')->name('cart');
-        Route::post('/checkout/checkout', 'checkout')->name('checkout.process');
-    });
-
-    Route::controller(App\Http\Controllers\Frontend\ContactUsController::class)->group(function () {
-        Route::get('/contact_us', 'index')->name('contact');
-    });
-
-    Route::controller(App\Http\Controllers\Frontend\CartController::class)->group(function () {
-        Route::post('/cart/add/{product}', 'add')->name('cart.add');
-        Route::delete('/cart/remove/{cart}', 'remove')->name('cart.remove');
-    });
-});
-
-Route::post('/fund-request', [App\Http\Controllers\Frontend\FundRequestController::class, 'store'])->name('fund_request.store');
-Route::post('/claim-request', [App\Http\Controllers\Frontend\ClaimRequestController::class, 'store'])->name('claim_request.store');
+// Fund and Claim Requests
+Route::post('fund-request', [FundRequestController::class, 'store'])->name('fund_request.store');
+Route::post('claim-request', [ClaimRequestController::class, 'store'])->name('claim_request.store');
 
 require __DIR__ . '/auth.php';

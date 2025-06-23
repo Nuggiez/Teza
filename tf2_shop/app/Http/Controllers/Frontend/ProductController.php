@@ -54,7 +54,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect('frontend/product')->with('message', 'Product Added Successfully');
+        return redirect()->route('products.index')->with('message', 'Product Added Successfully');
     }
 
     public function edit(Product $product)
@@ -94,7 +94,7 @@ class ProductController extends Controller
         }
         $product->update();
 
-        return redirect('frontend/product')->with('message', 'Product Updated Successfully');
+        return redirect()->route('products.index')->with('message', 'Product Updated Successfully');
     }
 
     public function showSingle($id)

@@ -37,7 +37,7 @@ class CategoryController extends Controller
         }
 
         $category->save();
-        return redirect('admin/category')->with('message','Category Added Successfully');
+        return redirect()->route('admin.categories.index')->with('message','Category Added Successfully');
 
     }
 
@@ -68,7 +68,7 @@ class CategoryController extends Controller
         }
         $category->update();
 
-        return redirect('admin/category')->with('message','Category Updated Successfully');
+        return redirect()->route('admin.categories.index')->with('message','Category Updated Successfully');
     }
 }
 

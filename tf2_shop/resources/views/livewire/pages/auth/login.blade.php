@@ -17,7 +17,11 @@ $login = function () {
 
     Session::regenerate();
 
-    $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+    if (auth()->user()?->is_admin) {
+        $this->redirectIntended(default: route('admin.dashboard', absolute: false), navigate: true);
+    } else {
+        $this->redirect(route('home', absolute: false), navigate: true);
+    }
 };
 
 ?>

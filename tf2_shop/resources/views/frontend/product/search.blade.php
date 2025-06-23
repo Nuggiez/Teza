@@ -9,7 +9,7 @@
                 @foreach ($products as $product)
                     <div
                         class="border-[var(--color-border)] border-[0.175rem] max-w-[18rem] max-h-[25rem] bg-[var(--color-bg-secondary)]">
-                        <a href="{{ url('frontend/product/single?id=' . $product->id) }}" class="block transition" style="text-decoration: none; color: inherit;">
+                        <a href="{{ route('products.single.show', $product->id) }}" class="block transition" style="text-decoration: none; color: inherit;">
                             <div class="bg-[var(--color-bg-primary)]"><img src="{{ asset('uploads/product/' . $product->image) }}"
                                     class="h-[12rem] mx-auto" /></div>
                             <div class="py-3">

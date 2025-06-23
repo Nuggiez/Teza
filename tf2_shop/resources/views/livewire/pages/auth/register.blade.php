@@ -34,7 +34,7 @@ $register = function () {
 
     Auth::login($user);
 
-    $this->redirect(route('dashboard', absolute: false), navigate: true);
+    $this->redirect(auth()->user()?->is_admin ? route('admin.dashboard', absolute: false) : route('home', absolute: false), navigate: true);
 };
 
 ?>

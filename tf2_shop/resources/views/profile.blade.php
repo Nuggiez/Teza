@@ -5,6 +5,15 @@
         </h2>
     </x-slot>
 
+    @if(auth()->user()->is_admin ?? false)
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-6">
+            <div class="p-4 bg-[var(--color-accent)] text-[var(--color-bg-primary)] shadow sm:rounded-lg flex items-center justify-between">
+                <span class="text-xl font-bold">Admin Zone</span>
+                <a href="/admin/dashboard" class="bg-[var(--color-bg-primary)] text-[var(--color-accent)] px-6 py-2 rounded font-semibold text-lg hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-accent)] transition">Go to Admin Panel</a>
+            </div>
+        </div>
+    @endif
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-[var(--color-bg-secondary)] shadow sm:rounded-lg">

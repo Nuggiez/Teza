@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form action="{{ url('frontend/product') }}" method="POST" enctype="multipart/form-data"
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data"
         class="max-w-2xl border-[var(--color-accent)] bg-[var(--color-bg-secondary)] border-[0.25rem] p-[1.5rem] border-solid mx-auto shadow-[var(--color-highlight)] shadow">
         @csrf
         <div class="mb-2">
