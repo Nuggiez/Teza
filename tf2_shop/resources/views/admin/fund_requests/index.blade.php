@@ -4,12 +4,6 @@
         <main class="flex-1 p-8">
             <div class="w-full py-8">
                 <h1 class="text-3xl font-bold mb-6">Fund Requests Management</h1>
-                @if(session('success'))
-                    <div class="bg-green-500 text-white p-4 rounded mb-4">{{ session('success') }}</div>
-                @endif
-                @if(session('error'))
-                    <div class="bg-red-500 text-white p-4 rounded mb-4">{{ session('error') }}</div>
-                @endif
                 <div class="overflow-x-auto w-full">
                     <table class="w-full border-collapse bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
                         <thead>

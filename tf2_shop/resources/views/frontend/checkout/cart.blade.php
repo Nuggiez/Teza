@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="h-screen flex items-center justify-center">
+    <div class="flex justify-center">
         <div class="border border-[var(--color-border)] text-2xl max-w-[1080px] overflow-hidden w-screen">
             <div class="flex w-full">
                 <div class="border border-[var(--color-border)] flex-1 min-w-0 p-2">Image</div>

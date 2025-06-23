@@ -1,9 +1,5 @@
 <div x-data="{ showDeleteModal: false }">
-    @if (session()->has('message'))
-        <div class="bg-[var(--color-success)] text-[var(--color-bg-primary)] px-4 py-2 rounded mb-4">
-            {{ session('message') }}
-        </div>
-    @endif
+
 
     <div>
         <a href="{{ route('admin.categories.create') }}" class="inline-flex items-center px-4 py-2 bg-[#FF9D00] border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-[#8b4f17] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF9D00]">Add Category</a>
@@ -14,26 +10,26 @@
     <table class="w-full border-[var(--color-border)] border-[0.25rem]">
         <thead>
             <tr>
-                <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Id</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Name</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Image</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Description</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Action</th>
+                <th class="border-[var(--color-border)] border-[0.25rem] p-2">Id</th>
+                <th class="border-[var(--color-border)] border-[0.25rem] p-2">Name</th>
+                <th class="border-[var(--color-border)] border-[0.25rem] p-2">Image</th>
+                <th class="border-[var(--color-border)] border-[0.25rem] p-2">Description</th>
+                <th class="border-[var(--color-border)] border-[0.25rem] p-2">Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($categories as $category)
                 <tr>
-                    <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2 text-center">
+                    <td class="border-[var(--color-border)] border-[0.25rem] p-2 text-center">
                         {{ $category->id }}
                     </td>
-                    <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">
+                    <td class="border-[var(--color-border)] border-[0.25rem] p-2">
                         {{ $category->name }}
                     </td>
-                    <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">
-                        <img src="{{ asset('uploads/category/' . $category->image) }}" class="h-20" />
+                    <td class="border-[var(--color-border)] border-[0.25rem] p-2">
+                        <img src="{{ asset('uploads/category/' . $category->image) }}" class=" h-12 aspect-auto" />
                     </td>
-                    <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">{{ $category->description }}
+                    <td class="border-[var(--color-border)] border-[0.25rem] p-2">{{ $category->description }}
                     </td>
                     <td class="border-[var(--color-border)] border-[0.25rem] h-20 p-0">
                         <a href="{{ route('admin.categories.edit', $category) }}" class="w-full h-1/2 bg-[var(--color-accent)] flex items-center justify-center text-[var(--color-bg-primary)]">
