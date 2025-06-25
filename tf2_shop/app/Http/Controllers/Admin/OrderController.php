@@ -30,6 +30,17 @@ class OrderController extends Controller
                 $seller->save();
             }
         }
+        // Remove products from the order
+        foreach ($order->items as $item) {
+            $product = $item->product;
+            if ($product) {
+                $path = public_path('uploads/product/' . $product->image);
+                if (file_exists($path)) {
+                    @unlink($path);
+                }
+                $product->delete();
+            }
+        }
         return redirect()->route('admin.orders.index')->with('success', 'Order marked as completed. Sellers have been paid.');
     }
 }

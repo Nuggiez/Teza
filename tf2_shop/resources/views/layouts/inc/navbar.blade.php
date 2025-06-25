@@ -10,7 +10,7 @@ $logout = function (Logout $logout) {
 
 ?>
 
-<nav class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+<nav class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl w-full px-4 py-2">
     <!-- Logo -->
     <a href="{{ route('home') }}" wire:navigate class="mx-auto md:mx-0 flex items-center">
         <span class="self-center text-5xl whitespace-nowrap">TradePlaza</span>

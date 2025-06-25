@@ -24,14 +24,14 @@
     @vite('resources/css/app.css', 'resources/js/app.js')
 </head>
 
-<body class="bg-[#2C2A2A] font-tf2 text-[#FF9D00] min-h-screen">
+<body class="bg-[#2C2A2A] font-tf2 text-[#FF9D00] min-h-screen flex flex-col">
     {{ $navbar ?? view('layouts.inc.navbar') }}
 
     <hr class="h-1 bg-[#FF9D00] border-0">
 
     @yield('admin')
 
-    <main class=" py-4 px-4 max-w-7xl w-full mx-auto">
+    <main class="flex-1 py-4 px-4 max-w-7xl w-full mx-auto">
         @if (session('success'))
             <div class="bg-green-500 text-white p-4 mb-4">
                 {{ session('success') }}
@@ -53,7 +53,7 @@
         </div>
     </main>
 
-    {{ $footer ?? '' }}
+    {{ $footer ?? view('components.footer') }}
 </body>
 
 </html>
