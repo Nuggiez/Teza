@@ -1,4 +1,4 @@
-<aside {{ $attributes->merge(['class' => 'w-64 bg-[var(--color-accent)] text-[var(--color-bg-primary)] p-2 pt-0 shadow-lg h-fit sticky self-start lg:h-full']) }}>
+<aside {{ $attributes->merge(['class' => 'w-64 bg-[var(--color-accent)] text-[var(--color-bg-primary)] p-1 pt-0 shadow-lg h-fit sticky self-start lg:h-full']) }}>
     <h2 class="text-2xl font-bold mb-8 pt-6 text-center hidden lg:block">Admin Menu</h2>
 
     <nav class="flex flex-col gap-2">

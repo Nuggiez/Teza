@@ -27,11 +27,11 @@
 <body class="bg-[#2C2A2A] font-tf2 text-[#FF9D00] min-h-screen">
     {{ $navbar ?? view('layouts.inc.navbar') }}
 
-    <hr class="h-1 my-4 bg-[#FF9D00] border-0">
+    <hr class="h-1 bg-[#FF9D00] border-0">
 
     @yield('admin')
 
-    <main class="px-4 max-w-7xl w-full mx-auto">
+    <main class=" py-4 px-4 max-w-7xl w-full mx-auto">
         @if (session('success'))
             <div class="bg-green-500 text-white p-4 mb-4">
                 {{ session('success') }}
@@ -47,9 +47,10 @@
                 {{ session('error') }}
             </div>
         @endif
-
-        {{ $slot ?? '' }}
-        @yield('content')
+        <div class='border-2 border-[var(--color-border)]'>
+            {{ $slot ?? '' }}
+            @yield('content')
+        </div>
     </main>
 
     {{ $footer ?? '' }}

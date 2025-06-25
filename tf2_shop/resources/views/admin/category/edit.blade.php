@@ -1,5 +1,6 @@
 <x-admin-layout>
-    <form action="{{ route('admin.categories.update', $category) }}" method="POST" enctype="multipart/form-data" class="max-w-2xl border-[var(--color-accent)] bg-[var(--color-bg-secondary)] border-[0.25rem] p-[1.5rem] border-solid mx-auto shadow-[var(--color-highlight)] shadow">
+    <h1 class="text-3xl font-bold mb-6">Editing Category</h1>
+    <form action="{{ route('admin.categories.update', $category) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-2">

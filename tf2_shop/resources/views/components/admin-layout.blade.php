@@ -9,13 +9,13 @@
             <x-admin-sidebar class="w-full static" />
         </div>
     </div>
-    <div class="flex border-2  border-[var(--color-border)]">
+    <div class="flex">
         <!-- Desktop Sidebar -->
         <div class="hidden lg:block">
             <x-admin-sidebar />
         </div>
         <!-- Main Content -->
-        <div class="flex-1 lg:py-2 lg:px-4">
+        <div class="flex-1 py-2 px-4">
             {{ $slot }}
         </div>
     </div>

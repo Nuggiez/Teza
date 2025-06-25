@@ -1,9 +1,16 @@
 <x-app-layout>
+
     <form action="{{ url('frontend/product/' . $product->id) }}" method="POST" enctype="multipart/form-data"
-        class="max-w-2xl border-[var(--color-accent)] bg-[var(--color-bg-secondary)] border-[0.25rem] p-[1.5rem] border-solid mx-auto shadow-[var(--color-highlight)] shadow">
+        class="py-2 px-4">
         @csrf
         @method('PUT')
-
+        <div class="flex justify-between items-start">
+            <h1 class="text-3xl font-bold mb-6">Editing Product</h1>
+            <a href="{{ route('products.index') }}"
+                class="inline-flex items-center px-4 py-2 bg-[#FF9D00] border border-transparent font-semibold text-white uppercase tracking-widest hover:bg-[#8b4f17] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF9D00]">
+                Go Back
+            </a>
+        </div>
         <div class="mb-2">
             <x-input-label for="name" :value="'Name'" />
             <x-text-input name="name" id="name" value="{{ $product->name }}" required />
@@ -22,13 +29,15 @@
         </div>
         <div class="mb-2">
             <x-input-label for="category_id" :value="'Category'" />
-            <!--<x-text-input name="category_id" id="category_id" value="{{ $product->category_id }}" required/>-->
-            <select name="category_id">
+            <select name="category_id" class="border-2 border-[var(--color-border)] focus:border-[var(--color-border)] focus:ring-[var(--color-border-focus)] text-2xl bg-[var(--color-bg-secondary)] w-full">
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>{{ $category->name }}"</option>
+                    <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>
+                        {{ $category->name }}"
+                    </option>
                 @endforeach
             </select>
         </div>
+
         <div>
             <x-primary-button>
                 {{ __('Update') }}
