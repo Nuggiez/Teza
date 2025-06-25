@@ -7,44 +7,67 @@
 
     <br>
 
-    <table class="w-full border-[var(--color-border)] border-[0.25rem]">
-        <thead>
-            <tr>
-                <th class="border-[var(--color-border)] border-[0.25rem] p-2">Id</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] p-2">Name</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] p-2">Image</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] p-2">Description</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] p-2">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($categories as $category)
+    <!-- Desktop Table View -->
+    <div class="hidden md:block">
+        <table class="w-full border-[var(--color-border)] border-[0.25rem]">
+            <thead>
                 <tr>
-                    <td class="border-[var(--color-border)] border-[0.25rem] p-2 text-center">
-                        {{ $category->id }}
-                    </td>
-                    <td class="border-[var(--color-border)] border-[0.25rem] p-2">
-                        {{ $category->name }}
-                    </td>
-                    <td class="border-[var(--color-border)] border-[0.25rem] p-2">
-                        <img src="{{ asset('uploads/category/' . $category->image) }}" class=" h-12 aspect-auto" />
-                    </td>
-                    <td class="border-[var(--color-border)] border-[0.25rem] p-2">{{ $category->description }}
-                    </td>
-                    <td class="border-[var(--color-border)] border-[0.25rem] h-20 p-0">
-                        <a href="{{ route('admin.categories.edit', $category) }}" class="w-full h-1/2 bg-[var(--color-accent)] flex items-center justify-center text-[var(--color-bg-primary)]">
-                            Edit
-                        </a>
-                        <hr class="border-t-[0.25rem] border-[var(--color-border)]" />
-                        <button wire:click="confirmDelete({{ $category->id }})" @click="showDeleteModal = true" class="w-full h-1/2 bg-[var(--color-error)] flex items-center justify-center text-[var(--color-bg-primary)]">
-                            Delete
-                        </button>
-                    </td>
+                    <th class="border-[var(--color-border)] border-[0.25rem] p-2">Id</th>
+                    <th class="border-[var(--color-border)] border-[0.25rem] p-2">Name</th>
+                    <th class="border-[var(--color-border)] border-[0.25rem] p-2">Image</th>
+                    <th class="border-[var(--color-border)] border-[0.25rem] p-2">Description</th>
+                    <th class="border-[var(--color-border)] border-[0.25rem] p-2">Action</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+                @foreach ($categories as $category)
+                    <tr>
+                        <td class="border-[var(--color-border)] border-[0.25rem] p-2 text-center">
+                            {{ $category->id }}
+                        </td>
+                        <td class="border-[var(--color-border)] border-[0.25rem] p-2">
+                            {{ $category->name }}
+                        </td>
+                        <td class="border-[var(--color-border)] border-[0.25rem] p-2">
+                            <img src="{{ asset('uploads/category/' . $category->image) }}" class=" h-12 aspect-auto" />
+                        </td>
+                        <td class="border-[var(--color-border)] border-[0.25rem] p-2">{{ $category->description }}
+                        </td>
+                        <td class="border-[var(--color-border)] border-[0.25rem] h-20 p-0">
+                            <a href="{{ route('admin.categories.edit', $category) }}" class="w-full h-1/2 bg-[var(--color-accent)] flex items-center justify-center text-[var(--color-bg-primary)]">
+                                Edit
+                            </a>
+                            <hr class="border-t-[0.25rem] border-[var(--color-border)]" />
+                            <button wire:click="confirmDelete({{ $category->id }})" @click="showDeleteModal = true" class="w-full h-1/2 bg-[var(--color-error)] flex items-center justify-center text-[var(--color-bg-primary)]">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <!-- Mobile Card View -->
+    <div class="grid grid-cols-1 gap-4 md:hidden">
+        @foreach ($categories as $category)
+            <div class="bg-[var(--color-bg-secondary)] p-4 rounded-lg shadow space-y-3">
+                <div class="flex justify-between items-center">
+                    <h2 class="font-bold text-lg">{{ $category->name }}</h2>
+                    <span class="text-xs bg-[var(--color-accent)] text-[var(--color-bg-primary)] px-2 py-1 rounded">ID: {{ $category->id }}</span>
+                </div>
+                <div>
+                    <img src="{{ asset('uploads/category/' . $category->image) }}" class="h-16 w-auto rounded" />
+                </div>
+                <div class="text-sm space-y-1">
+                    <p><strong>Description:</strong> {{ $category->description }}</p>
+                </div>
+                <div class="flex w-full space-x-2 pt-2">
+                    <a href="{{ route('admin.categories.edit', $category) }}" class="flex-1 bg-[var(--color-accent)] text-[var(--color-bg-primary)] px-3 py-2 rounded text-center">Edit</a>
+                    <button wire:click="confirmDelete({{ $category->id }})" @click="showDeleteModal = true" class="flex-1 bg-[var(--color-error)] text-[var(--color-bg-primary)] px-3 py-2 rounded">Delete</button>
+                </div>
+            </div>
+        @endforeach
+    </div>
     <div class="mt-4">
         {{ $categories->links() }}
     </div>

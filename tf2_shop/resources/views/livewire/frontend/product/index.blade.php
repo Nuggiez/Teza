@@ -11,49 +11,72 @@
 
     <br>
 
-    <table class="w-full border-[var(--color-border)] border-[0.25rem]">
-        <thead>
-            <tr>
-                <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Name</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Image</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Description</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Price</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Category</th>
-                <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($products as $product)
+    <!-- Desktop Table View -->
+    <div class="hidden md:block">
+        <table class="w-full border-[var(--color-border)] border-[0.25rem]">
+            <thead>
                 <tr>
-                    <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">
-                        {{ $product->name }}
-                    </td>
-                    <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">
-                        <img src="{{ asset('uploads/product/' . $product->image) }}" class="h-20" />
-                    </td>
-                    <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">{{ $product->description }}
-                    </td>
-                    <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">
-                        {{ $product->price }}
-                    </td>
-                    <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">
-                        {{ $product->category ? $product->category->name : 'N/A' }}
-                    </td>
-
-                    <td class="border-[var(--color-border)] border-[0.25rem] h-20 p-0">
-                        <a href="{{ url('frontend/product/edit/' . $product->id) }}" class="w-full h-1/2 bg-[var(--color-accent)] flex items-center justify-center text-[var(--color-bg-primary)]">
-                            Edit
-                        </a>
-                        <hr class="border-t-[0.25rem] border-[var(--color-border)]" />
-                        <button wire:click="confirmDelete({{ $product->id }})" @click="showDeleteModal = true" class="w-full h-1/2 bg-[var(--color-error)] flex items-center justify-center text-[var(--color-bg-primary)]">
-                            Delete
-                        </button>
-                    </td>
+                    <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Name</th>
+                    <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Image</th>
+                    <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Description</th>
+                    <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Price</th>
+                    <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Category</th>
+                    <th class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">Action</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+                @foreach ($products as $product)
+                    <tr>
+                        <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">
+                            {{ $product->name }}
+                        </td>
+                        <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">
+                            <img src="{{ asset('uploads/product/' . $product->image) }}" class="h-20" />
+                        </td>
+                        <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">{{ $product->description }}
+                        </td>
+                        <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">
+                            {{ $product->price }}
+                        </td>
+                        <td class="border-[var(--color-border)] border-[0.25rem] px-3 py-2">
+                            {{ $product->category ? $product->category->name : 'N/A' }}
+                        </td>
+                        <td class="border-[var(--color-border)] border-[0.25rem] h-20 p-0">
+                            <a href="{{ route('products.edit', $product->id) }}" class="w-full h-1/2 bg-[var(--color-accent)] flex items-center justify-center text-[var(--color-bg-primary)]">
+                                Edit
+                            </a>
+                            <hr class="border-t-[0.25rem] border-[var(--color-border)]" />
+                            <button wire:click="confirmDelete({{ $product->id }})" @click="showDeleteModal = true" class="w-full h-1/2 bg-[var(--color-error)] flex items-center justify-center text-[var(--color-bg-primary)]">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <!-- Mobile Card View -->
+    <div class="grid grid-cols-1 gap-4 md:hidden">
+        @foreach ($products as $product)
+            <div class="bg-[var(--color-bg-secondary)] p-4 rounded-lg shadow space-y-3">
+                <div class="flex justify-between items-center">
+                    <h2 class="font-bold text-lg">{{ $product->name }}</h2>
+                    <span class="text-xs bg-[var(--color-accent)] text-[var(--color-bg-primary)] px-2 py-1 rounded">{{ $product->category ? $product->category->name : 'N/A' }}</span>
+                </div>
+                <div>
+                    <img src="{{ asset('uploads/product/' . $product->image) }}" class="h-20 w-auto rounded mx-auto" />
+                </div>
+                <div class="text-sm space-y-1">
+                    <p><strong>Description:</strong> {{ $product->description }}</p>
+                    <p><strong>Price:</strong> ${{ $product->price }}</p>
+                </div>
+                <div class="flex w-full space-x-2 pt-2">
+                    <a href="{{ route('products.edit', $product->id) }}" class="flex-1 bg-[var(--color-accent)] text-[var(--color-bg-primary)] px-3 py-2 rounded text-center">Edit</a>
+                    <button wire:click="confirmDelete({{ $product->id }})" @click="showDeleteModal = true" class="flex-1 bg-[var(--color-error)] text-[var(--color-bg-primary)] px-3 py-2 rounded">Delete</button>
+                </div>
+            </div>
+        @endforeach
+    </div>
     <div class="mt-4">
         {{ $products->links() }}
     </div>

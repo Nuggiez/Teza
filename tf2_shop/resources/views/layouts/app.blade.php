@@ -29,6 +29,8 @@
 
     <hr class="h-1 my-4 bg-[#FF9D00] border-0">
 
+    @yield('admin')
+
     <main class="px-4 max-w-7xl w-full mx-auto">
         @if (session('success'))
             <div class="bg-green-500 text-white p-4 rounded mb-4">
@@ -46,7 +48,8 @@
             </div>
         @endif
 
-        {{ $slot }}
+        {{ $slot ?? '' }}
+        @yield('content')
     </main>
 
     {{ $footer ?? '' }}
