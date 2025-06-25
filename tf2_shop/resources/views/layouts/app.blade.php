@@ -33,17 +33,17 @@
 
     <main class="px-4 max-w-7xl w-full mx-auto">
         @if (session('success'))
-            <div class="bg-green-500 text-white p-4 rounded mb-4">
+            <div class="bg-green-500 text-white p-4 mb-4">
                 {{ session('success') }}
             </div>
         @endif
         @if (session('info'))
-            <div class="bg-blue-500 text-white p-4 rounded mb-4">
+            <div class="bg-blue-500 text-white p-4 mb-4">
                 {{ session('info') }}
             </div>
         @endif
         @if (session('error'))
-            <div class="bg-red-500 text-white p-4 rounded mb-4">
+            <div class="bg-red-500 text-white p-4 mb-4">
                 {{ session('error') }}
             </div>
         @endif

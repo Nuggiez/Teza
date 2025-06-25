@@ -7,22 +7,22 @@
 
     @if(auth()->user()->is_admin ?? false)
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-6">
-            <div class="p-4 bg-[var(--color-accent)] text-[var(--color-bg-primary)] shadow sm:rounded-lg flex items-center justify-between">
+            <div class="p-4 bg-[var(--color-accent)] text-[var(--color-bg-primary)] shadow  flex items-center justify-between">
                 <span class="text-xl font-bold">Admin Zone</span>
-                <a href="/admin/dashboard" class="bg-[var(--color-bg-primary)] text-[var(--color-accent)] px-6 py-2 rounded font-semibold text-lg hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-accent)] transition">Go to Admin Panel</a>
+                <a href="/admin/dashboard" class="bg-[var(--color-bg-primary)] text-[var(--color-accent)] px-6 py-2 font-semibold text-lg hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-accent)] transition">Go to Admin Panel</a>
             </div>
         </div>
     @endif
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-[var(--color-bg-secondary)] shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-[var(--color-bg-secondary)] shadow ">
                 <div class="max-w-xl">
                     <livewire:profile.update-profile-information-form />
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-[var(--color-bg-secondary)] shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-[var(--color-bg-secondary)] shadow ">
                 <div class="max-w-xl">
                     <h3 class="text-lg font-medium mb-2">Account Funds</h3>
                     <div class="text-2xl font-bold mb-4">${{ number_format(auth()->user()->funds, 2) }}</div>
@@ -35,12 +35,12 @@
 
                     <!-- Insert Funds Modal -->
                     <div id="insert-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                        <div class="bg-[var(--color-bg-secondary)] p-8 rounded shadow-lg w-full max-w-md">
+                        <div class="bg-[var(--color-bg-secondary)] p-8 shadow-lg w-full max-w-md">
                             <h2 class="text-2xl mb-4">Insert Funds</h2>
-                            <input id="insert-amount" type="number" min="0.01" step="0.01" placeholder="Amount" class="rounded p-2 text-black w-full mb-4">
+                            <input id="insert-amount" type="number" min="0.01" step="0.01" placeholder="Amount" class=" p-2 text-black w-full mb-4">
                             <div class="flex justify-end gap-2">
-                                <button id="close-insert-modal" class="px-4 py-2 bg-gray-400 text-white rounded">Cancel</button>
-                                <button id="continue-insert" class="px-4 py-2 bg-blue-600 text-white rounded">Continue</button>
+                                <button id="close-insert-modal" class="px-4 py-2 bg-gray-400 text-white">Cancel</button>
+                                <button id="continue-insert" class="px-4 py-2 bg-blue-600 text-white">Continue</button>
                             </div>
                             <span id="insert-modal-error" class="text-red-500 mt-2 block"></span>
                         </div>
@@ -48,12 +48,12 @@
 
                     <!-- Claim Funds Modal -->
                     <div id="claim-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                        <div class="bg-[var(--color-bg-secondary)] p-8 rounded shadow-lg w-full max-w-md">
+                        <div class="bg-[var(--color-bg-secondary)] p-8 shadow-lg w-full max-w-md">
                             <h2 class="text-2xl mb-4">Claim Funds</h2>
-                            <input id="claim-amount-modal" type="number" min="0.01" step="0.01" max="{{ auth()->user()->funds }}" placeholder="Amount to claim" class="rounded p-2 text-black w-full mb-4">
+                            <input id="claim-amount-modal" type="number" min="0.01" step="0.01" max="{{ auth()->user()->funds }}" placeholder="Amount to claim" class=" p-2 text-black w-full mb-4">
                             <div class="flex justify-end gap-2">
-                                <button id="close-claim-modal" class="px-4 py-2 bg-gray-400 text-white rounded">Cancel</button>
-                                <button id="continue-claim" class="px-4 py-2 bg-green-600 text-white rounded">Continue</button>
+                                <button id="close-claim-modal" class="px-4 py-2 bg-gray-400 text-white">Cancel</button>
+                                <button id="continue-claim" class="px-4 py-2 bg-green-600 text-white">Continue</button>
                             </div>
                             <span id="claim-modal-error" class="text-red-500 mt-2 block"></span>
                         </div>
@@ -61,13 +61,13 @@
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-[var(--color-bg-secondary)]  shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-[var(--color-bg-secondary)]  shadow ">
                 <div class="max-w-xl">
                     <livewire:profile.update-password-form />
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-[var(--color-bg-secondary)]  shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-[var(--color-bg-secondary)]  shadow ">
                 <div class="max-w-xl">
                     <livewire:profile.delete-user-form />
                 </div>

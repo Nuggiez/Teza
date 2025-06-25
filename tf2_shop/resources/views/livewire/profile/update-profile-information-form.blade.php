@@ -80,7 +80,7 @@ $sendVerification = function () {
                     <p class="text-sm mt-2 ">
                         {{ __('Your email address is unverified.') }}
 
-                        <button wire:click.prevent="sendVerification" class="underline text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2">
+                        <button wire:click.prevent="sendVerification" class="underline text-sm  focus:outline-none focus:ring-2 focus:ring-offset-2">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
                     </p>

@@ -53,19 +53,19 @@ $login = function () {
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-[#FF9D00] shadow-sm bg-transparent focus:ring-[#FF9D00]" name="remember">
+                <input wire:model="form.remember" id="remember" type="checkbox" class="border-gray-300 text-[#FF9D00] shadow-sm bg-transparent focus:ring-[#FF9D00]" name="remember">
                 <span class="ms-2 text-sm text-[#FF9D00]">{{ __('Remember me') }}</span>
             </label>
         </div>
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-                <a class=" text-sm text-[#FF9D00] hover:text-[#8b4f17] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
+                <a class=" text-sm text-[#FF9D00] hover:text-[#8b4f17]  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
 
-            <button type="submit" class="inline-flex items-center px-4 py-2 bg-[#FF9D00] border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-[#8b4f17] active:bg-gray-900 transition ease-in-out duration-150 ms-3">
+            <button type="submit" class="inline-flex items-center px-4 py-2 bg-[#FF9D00] border border-transparent  font-semibold text-xs text-white uppercase tracking-widest hover:bg-[#8b4f17] active:bg-gray-900 transition ease-in-out duration-150 ms-3">
                 Log in
             </button>
             

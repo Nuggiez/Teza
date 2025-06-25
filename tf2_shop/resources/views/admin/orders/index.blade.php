@@ -43,7 +43,7 @@
                                         class="w-full">
                                         @csrf
                                         <button type="submit"
-                                            class="w-full bg-green-600 text-white px-3 py-2 rounded">Mark as
+                                            class="w-full bg-green-600 text-white px-3 py-2">Mark as
                                             Completed</button>
                                     </form>
                                 @else
@@ -58,11 +58,11 @@
         <!-- Mobile Card View -->
         <div class="grid grid-cols-1 gap-4 md:hidden">
             @foreach ($orders as $order)
-                <div class="bg-[var(--color-bg-secondary)] p-4 rounded-lg shadow space-y-3">
+                <div class="bg-[var(--color-bg-secondary)] p-4 r shadow space-y-3">
                     <div class="flex justify-between items-center">
                         <h2 class="font-bold text-lg">Order #{{ $order->id }}</h2>
                         <span
-                            class="px-2 py-1 text-sm rounded-full 
+                            class="px-2 py-1 text-sm  
                             @if ($order->status === 'pending') bg-yellow-500 text-black @else bg-green-600 text-white @endif">
                             {{ ucfirst($order->status) }}
                         </span>
@@ -87,7 +87,7 @@
                             class="w-full pt-2">
                             @csrf
                             <button type="submit"
-                                class="w-full bg-green-600 text-white px-3 py-2 rounded">Mark as
+                                class="w-full bg-green-600 text-white px-3 py-2">Mark as
                                 Completed</button>
                         </form>
                     @endif

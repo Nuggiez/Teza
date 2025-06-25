@@ -21,7 +21,7 @@
             <div class="border border-[var(--color-border)] flex-grow">
                 <form action="{{ route('cart.add', $product->id) }}" method="POST" class="w-full h-full">
                     @csrf
-                    <x-primary-button class="rounded-none w-full h-full flex items-center justify-center">
+                    <x-primary-button class=" w-full h-full flex items-center justify-center">
                         {{ __('Add to cart') }}
                     </x-primary-button>
                 </form>

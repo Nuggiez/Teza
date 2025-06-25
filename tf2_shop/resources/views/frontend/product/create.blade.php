@@ -21,7 +21,7 @@
         <div class="mb-2">
             <x-input-label for="category_id" :value="'Category'" />
             <!-- <x-text-input name="category_id" id="category_id" required /> -->
-            <select name="category_id" class="border-[0.125rem] border-[var(--color-border)] focus:border-[var(--color-border)] focus:ring-[var(--color-border-focus)] rounded-md bg-transparent w-full text-2xl">
+            <select name="category_id" class="border-[0.125rem] border-[var(--color-border)] focus:border-[var(--color-border)] focus:ring-[var(--color-border-focus)]  bg-transparent w-full text-2xl">
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}"</option>
                 @endforeach

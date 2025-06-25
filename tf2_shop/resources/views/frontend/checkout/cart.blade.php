@@ -25,7 +25,7 @@
                 <div class="border border-[var(--color-border)] flex-[2] min-w-0 p-4 relative">
                     <form action="{{ route('checkout.process') }}" method="POST">
                         @csrf
-                        <x-primary-button class="rounded-none absolute top-0 left-0 w-full">
+                        <x-primary-button class=" absolute top-0 left-0 w-full">
                             {{ __('Checkout') }}
                         </x-primary-button>
                     </form>

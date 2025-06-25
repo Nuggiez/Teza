@@ -20,7 +20,7 @@ $logout = function (Logout $logout) {
     <form action="{{ route('products.search') }}" method="GET" class="flex-grow flex items-center mx-4">
         <div class="relative w-full">
             <input type="search" name="query" id="search-dropdown"
-                class="block p-2.5 w-full z-20 text-[1.25rem] text-white bg-transparent rounded-[1.25rem] border-[#FF9D00] border-[0.125rem] placeholder-white"
+                class="block p-2.5 w-full z-20 text-[1.25rem] text-white bg-transparent border-[#FF9D00] border-[0.125rem] placeholder-white"
                 placeholder="Search" value="{{ request('query') }}" required />
             <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -43,7 +43,7 @@ $logout = function (Logout $logout) {
             <img src="{{ asset('icons/navigation/cart.svg') }}" class="w-[2.em] h-[2.5rem] mx-auto">cart
             @if ($cartCount > 0)
                 <span
-                    class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">{{ $cartCount }}</span>
+                    class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white  text-xs w-5 h-5 flex items-center justify-center">{{ $cartCount }}</span>
             @endif
         </a>
 

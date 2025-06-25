@@ -16,7 +16,7 @@
                 </a>
                 <form action="{{ route('cart.add', $product->id) }}" method="POST">
                     @csrf
-                    <x-primary-button class="rounded-none w-full">
+                    <x-primary-button class=" w-full">
                         {{ __('Add to cart') }}
                     </x-primary-button>
                 </form>
